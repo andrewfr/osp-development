@@ -6,7 +6,7 @@ class SyllabusClassifier(object):
         """Stub for Syllabus classifiers
 
         Args:
-            fileName : file name of pk1 and associated files 
+            fileName : pickle file 
 
         """
         self.pipeline = joblib.load(fileName)
