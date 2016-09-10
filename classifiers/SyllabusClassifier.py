@@ -21,11 +21,8 @@ class SyllabusClassifier(object):
         return:
             boolean True is a syllabus. False not a syllabus
         """
-        text = unicode(text)
-        self.pipeline.set_params(vect__input='content')
-        transformed = self.pipeline.transform(text)
-        prediction = self.pipeline.predict(transformed)
-        return(prediction)
+
+        return self.pipeline.predict([text])
 
 
 def main():
@@ -33,10 +30,14 @@ def main():
     sys.setdefaultencoding('utf8')
 
     with open("../documents/9943.txt") as fp:
-        text = fp.read()
+        text_1 = fp.read()
+
+    with open("../documents/34657.txt") as fp:
+        text_2 = fp.read()
 
     classifier = SyllabusClassifier("syllabusClassifier.pkl")
-    print(classifier.is_syllabus(text))
+    print(classifier.is_syllabus(text_1))
 
+    print(classifier.is_syllabus(text_2))
 if __name__ == "__main__":
     main()
