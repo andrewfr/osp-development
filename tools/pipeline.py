@@ -17,11 +17,11 @@ from sklearn.metrics import classification_report
 
 PREFIX = "../documents/"
 
-def build_tables():
+def build_tables(file_name):
     table = {}
     data = []
     responses = []
-    with open("../data/dev-test.csv") as fp:
+    with open(file_name) as fp:
         reader = csv.reader(fp)
         next(reader)
         for row in reader:
@@ -85,7 +85,7 @@ def test_syllabus_classifier(data, responses):
     testing_data = build_data_set(testing_files)
 
 def main():
-    table, data_files, responses = build_tables()
+    table, data_files, responses = build_tables("../data/dev-test.csv")
     training_files, testing_files, training_responses, testing_responses = \
                     train_test_split(data_files, responses, test_size = .25, random_state = 0)
 
