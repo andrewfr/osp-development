@@ -17,7 +17,7 @@ from sklearn.metrics import classification_report
 
 PREFIX = "../documents/"
 
-def build_tables(file_name):
+def build_tables(file_name, prefix):
     table = {}
     data = []
     responses = []
@@ -25,22 +25,22 @@ def build_tables(file_name):
         reader = csv.reader(fp)
         next(reader)
         for row in reader:
-            document = row[0].replace("../documents/","").replace(".txt","")
+            document = row[0].replace(prefix,"").replace(".txt","")
             table[document] = int(row[1])
             data.append(document)
             responses.append(int(row[1]))
     return table, data, responses
 
-def build_file_names(self, file_names):
+def build_file_names(self, file_names, prefix):
     syllabus_files = []
     for sample in samples:
-        syllabus_files.append(PREFIX + str(sample)  + ".txt")
+        syllabus_files.append(prefix + str(sample)  + ".txt")
     return syllabus_files
 
-def build_data_set(data_files):
+def build_data_set(data_files, prefix):
     file_set = []
     for file_name in data_files:
-        file_name = PREFIX + str(file_name)  + ".txt"
+        file_name = prefix + str(file_name)  + ".txt"
         text = get_text(file_name)
         file_set.append(text)
     return file_set
@@ -85,11 +85,11 @@ def test_syllabus_classifier(data, responses):
     testing_data = build_data_set(testing_files)
 
 def main():
-    table, data_files, responses = build_tables("../data/dev-test.csv")
+    table, data_files, responses = build_tables("../data/dev-test.csv", PREFIX)
     training_files, testing_files, training_responses, testing_responses = \
                     train_test_split(data_files, responses, test_size = .25, random_state = 0)
 
-    training_data = build_data_set(training_files)
+    training_data = build_data_set(training_files, PREFIX)
     pipeline = build_pipeline(None)
     training_data = pipeline.fit_transform(training_data, training_responses)
     save_pipeline(pipeline, "syllabusClassifier.pkl")   
