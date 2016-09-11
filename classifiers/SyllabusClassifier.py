@@ -36,8 +36,9 @@ def main():
         text_2 = fp.read()
 
     classifier = SyllabusClassifier("syllabusClassifier.pkl")
-    print(classifier.is_syllabus(text_1))
+    assert classifier.is_syllabus(text_1) == True
 
-    print(classifier.is_syllabus(text_2))
+    assert classifier.is_syllabus(text_2) == False
+    
 if __name__ == "__main__":
     main()
