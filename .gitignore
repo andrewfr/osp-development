@@ -1,3 +1,4 @@
 documents
 dump
 *.pyc
+*.pkl
