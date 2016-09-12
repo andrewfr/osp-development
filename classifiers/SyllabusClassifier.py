@@ -22,7 +22,7 @@ class SyllabusClassifier(object):
             boolean True is a syllabus. False not a syllabus
         """
 
-        return self.pipeline.predict([text])
+        return bool(self.pipeline.predict([text])[0])
 
 
 def main():
@@ -36,6 +36,7 @@ def main():
         text_2 = fp.read()
 
     classifier = SyllabusClassifier("syllabusClassifier.pkl")
+
     assert classifier.is_syllabus(text_1) == True
 
     assert classifier.is_syllabus(text_2) == False

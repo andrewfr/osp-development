@@ -1,4 +1,5 @@
 documents
+experiments
 dump
 *.pyc
 *.pkl
